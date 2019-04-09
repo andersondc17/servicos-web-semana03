@@ -1,0 +1,70 @@
+﻿@model IEnumerable<WebApplication1.Models.clsCliente>
+
+@{
+    ViewBag.Title = "clientes_nombre";
+}
+
+<h2>clientes_nombre</h2>
+
+@using (Html.BeginForm())
+{
+    <em>Nombre del Cliente</em>
+    <br />
+    @Html.TextBox("nombre")
+    <input type="submit" value="Consulta" />
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.idcliente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nombrecia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.direccion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nombrepais)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.telefono)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.idcliente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombrecia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.direccion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombrepais)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.telefono)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
+
+@for(int i = 0; i < (int)ViewBag.pags; i++)
+{
+    @Html.ActionLink((i + 1).ToString(), "clientes_nombre", new { p = i }, new { @class = "btn btn-primary" });
+}

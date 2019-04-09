@@ -1,0 +1,65 @@
+﻿@model IEnumerable<WebApplication1.Models.clsPedido>
+
+@{
+    ViewBag.Title = "pedidos_empleado";
+}
+
+<h2>pedidos_empleado</h2>
+
+@using (Html.BeginForm())
+{
+    <em>Selecciona un cliente</em>
+    <br />
+    @Html.DropDownList("codigo",(SelectList)ViewBag.clientes)
+    <input type="submit"  value="Consulta" />
+}
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IdPedido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaPedido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DireccionDestinatario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CiudadDestinatario)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdPedido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaPedido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DireccionDestinatario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CiudadDestinatario)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
+
+@for(int i = 0; i < (int)ViewBag.pags; i++)
+{
+    @Html.ActionLink((i + 1).ToString(), "pedidos_empleado", new { p = i, codigo = ViewBag.codigo }, new { @class = "btn btn-primary" });
+}
