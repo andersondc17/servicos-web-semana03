@@ -1,0 +1,34 @@
+use Negocios2019
+go
+
+
+create proc sp_cliente_filtro
+@nombre varchar(30)
+as
+select cl.IdCliente,cl.NombreCia,cl.Direccion,pa.NombrePais,cl.Telefono
+from tb_clientes cl join tb_paises pa
+on cl.idpais=pa.Idpais where cl.NombreCia like @nombre+'%'
+go
+
+execute sp_cliente_filtro 'a'
+go
+
+create procedure sp_pedidos_cliente
+@id varchar(5)
+as
+select IdPedido,FechaPedido,DireccionDestinatario,CiudadDestinatario
+from tb_pedidoscabe
+where IdCliente=@id
+go
+
+execute sp_pedidos_cliente 'ALFKI'
+go
+
+create proc sp_cliente
+as
+select IdCliente,NombreCia
+from tb_clientes
+go
+
+execute sp_cliente
+go
